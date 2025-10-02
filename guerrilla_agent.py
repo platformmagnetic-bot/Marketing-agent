@@ -28,10 +28,10 @@ class Config:
     
     OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
     
-    PORT = int(os.getenv("PORT", 5000))
+    # BLAXEL FIX: Port from environment
+    PORT = int(os.getenv("PORT", 8080))
     DEMO_MODE = os.getenv("DEMO_MODE", "True").lower() == "true"
-
-
+    
 class DatabaseManager:
     """Manages SQLite database for action logs and metrics"""
     
@@ -648,6 +648,7 @@ if __name__ == "__main__":
             port=Config.PORT,
             debug=False,
             use_reloader=False
+            threaded=True
         )
     except KeyboardInterrupt:
         print("\n\n🛑 Shutting down agent...")
